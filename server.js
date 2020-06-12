@@ -38,16 +38,16 @@ const execute = async (query, variables, reqHeaders) => {
 app.post('/createEventLog', async (req, res) => {
     const { event_log } = req.body.input;
     const { data, errors } = await execute(ADD_EVENT,
-                                           { event_log},
-                                           {});
+                                           { event_log },
+                                           {}
+                                          );
 
     console.log(data);
     console.log(errors);
     var resp = data["insert_events_one"];
-  // success
-  return res.json({
-    event_id: resp.id
-  });
+    return res.json({
+      event_id: resp.id
+    });
 
 });
 
