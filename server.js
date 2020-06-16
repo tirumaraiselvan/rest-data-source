@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.json());
 
 const HASURA_GRAPHQL_ENDPOINT = process.env.GRAPHQL_ENDPOINT || 'https://hasuracon-remote-joins.herokuapp.com/v1/graphql';
+const HASURA_GRAPHQL_ADMIN_SECRET=process.env.ADMIN_SECRET;
 
 const ADD_EVENT = `
   mutation ($event_log: jsonb!){
@@ -39,7 +40,7 @@ app.post('/createEventLog', async (req, res) => {
     const { event_log } = req.body.input;
     const { data, errors } = await execute(ADD_EVENT,
                                            { event_log },
-                                           {}
+                                           { "x-hasura-admin-secret": HASURA_GRAPHQL_ADMIN_SECRET}
                                           );
 
     console.log(data);
