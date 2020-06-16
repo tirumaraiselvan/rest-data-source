@@ -47,7 +47,7 @@ app.post('/createEventLog', async (req, res) => {
     console.log(errors);
     var resp = data["insert_events_one"];
     return res.json({
-      event_id: resp.id
+      id: resp.id
     });
 
 });
