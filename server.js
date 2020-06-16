@@ -43,7 +43,8 @@ app.post('/createEventLog', async (req, res) => {
     const { data, errors } = await execute(ADD_EVENT,
                                            { event_log },
                                            { "x-hasura-admin-secret": HASURA_GRAPHQL_ADMIN_SECRET
-					   , "x-hasura-role": session_variables["x-hasura-role"]
+                                           , "x-hasura-role": session_variables["x-hasura-role"]
+                                           , "x-hasura-use-backend-only-permissions": true
 					   }
                                           );
 
