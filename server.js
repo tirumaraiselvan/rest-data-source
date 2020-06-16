@@ -37,10 +37,14 @@ const execute = async (query, variables, reqHeaders) => {
 
 // Request Handler
 app.post('/createEventLog', async (req, res) => {
+    const session_variables = req.body.session_variables;
+    console.log(session_variables);
     const { event_log } = req.body.input;
     const { data, errors } = await execute(ADD_EVENT,
                                            { event_log },
-                                           { "x-hasura-admin-secret": HASURA_GRAPHQL_ADMIN_SECRET}
+                                           { "x-hasura-admin-secret": HASURA_GRAPHQL_ADMIN_SECRET
+					   , "x-hasura-role": session_variables["x-hasura-role"]
+					   }
                                           );
 
     console.log(data);
